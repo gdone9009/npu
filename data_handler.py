@@ -35,22 +35,18 @@ def load_json_data(file_path='data.json'):
         return None
     
 def generate_standard_pattern(size, pattern_type):
-    """
-    N x N 크기의 표준 십자가(Cross) 또는 X 패턴을 생성합니다.
-    """
-    # 0.0으로 채워진 빈 행렬 생성
-    matrix = [[0.0 for _ in range(size)] for _ in range(size)]
+    """크기 N을 입력받아 표준 패턴을 자동 생성 (재활용 가능)"""
+    matrix = [[0.0] * size for _ in range(size)]
     mid = size // 2
 
     if pattern_type == "Cross":
         for i in range(size):
-            matrix[mid][i] = 1.0  # 가로줄 (ㅡ)
-            matrix[i][mid] = 1.0  # 세로줄 (ㅣ)
-            
+            matrix[mid][i] = 1.0
+            matrix[i][mid] = 1.0
     elif pattern_type == "X":
         for i in range(size):
-            matrix[i][i] = 1.0                # 주 대각선 (\)
-            matrix[i][size - 1 - i] = 1.0     # 부 대각선 (/)
+            matrix[i][i] = 1.0
+            matrix[i][size - 1 - i] = 1.0
             
     return matrix
 

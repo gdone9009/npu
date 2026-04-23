@@ -32,3 +32,15 @@ def measure_performance(pattern, filter_data, iterations=10):
     end = time.perf_counter()
     # 10회 평균 측정 및 ms 단위 변환
     return ((end - start) / iterations) * 1000
+
+def flatten_matrix(matrix):
+    """2차원 행렬을 1차원 리스트로 변환 (최적화 준비)"""
+    return [val for row in matrix for val in row]
+
+def calculate_mac_optimized(flat_pattern, flat_filter):
+    """1차원 배열을 이용한 최적화된 MAC 연산"""
+    score = 0.0
+    # 인덱스 계산 없이 단일 루프로 순회하여 오버헤드 감소
+    for i in range(len(flat_pattern)):
+        score += flat_pattern[i] * flat_filter[i]
+    return score
